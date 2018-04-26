@@ -56,6 +56,10 @@ public class registreren extends AppCompatActivity {
 
     }
 
+    /**
+     * Registers a user with the filled in edittexts.
+     * @param v
+     */
     public void register(View v) {
         EditText voornaam = (EditText) findViewById(R.id.editText2);
         EditText naam = (EditText) findViewById(R.id.editText3);

@@ -91,6 +91,10 @@ public class experimentshow extends AppCompatActivity {
 
     }
 
+    /**
+     * Voegt een experiment toe aan de lijst.
+     * @param e Experiment dat toegevoegd wordt aan de lijst.
+     */
     public static void addExperiment(Experimenten e) {
         if (experimenten == null) {
             experimenten = new ArrayList<Experimenten>();

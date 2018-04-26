@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
 
-    public static byte[] FloatArray2ByteArray(ArrayList<Float> values) {
+    private static byte[] FloatArray2ByteArray(ArrayList<Float> values) {
         ByteBuffer buffer = ByteBuffer.allocate(4 * values.size());
 
         for (float value : values) {
@@ -152,6 +152,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         return buffer.array();
     }
 
+    /**
+     * Voegt een meting toe aan de grafiek en wordt opgeslagen bij detectie van een trilling.
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor mySensor = event.sensor;
@@ -250,7 +254,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
     }
 
-
+    /**
+     * Slaat de meting op in een JSON? en geeft de activity weer om op te slaan.
+     */
     public void change() {
         meten = false;
         xB = FloatArray2ByteArray(xList);
@@ -273,7 +279,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         startActivity(intent);
 
     }
-
+    /**
+     * Slaat de meting op in een JSON? en geeft de activity weer om op te slaan.
+     */
     public void meting(View view) throws Exception {
         xB = FloatArray2ByteArray(xList);
         yB = FloatArray2ByteArray(yList);

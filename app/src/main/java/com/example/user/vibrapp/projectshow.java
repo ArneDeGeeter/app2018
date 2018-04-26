@@ -89,8 +89,8 @@ public class projectshow extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param p
+     * Voegt een project toe aan de lijst om later weert te geven.
+     * @param p Project dat toegevoegd wordt
      */
     public static void addProject(Project p) {
         if (projects == null) {

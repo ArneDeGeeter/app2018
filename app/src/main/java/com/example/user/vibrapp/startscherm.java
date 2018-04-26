@@ -48,6 +48,23 @@ public class startscherm extends AppCompatActivity {
             Log.e("requestSingleUpdate: ", "perm" + permission);
 
         }
+        EditText ip = (EditText) findViewById(R.id.ip);
+
+        ip.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                HttpClass.ip = s.toString();
+            }
+        });
+
        /* Button button = (Button) findViewById(R.id.startB2);
         final LocationListener locationListener = new LocationListener() {
             @Override
@@ -133,6 +150,11 @@ public class startscherm extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * Gaat naar de activity en toont alle projecten, of indien niet aangemeld, gaat naar het loginscherm
+     *
+     * @param view
+     */
     public void opvragenMeting(View view) {
 
         //TODO: IMPLEMENT BELOW
@@ -165,12 +187,21 @@ public class startscherm extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gaat naar de activity om te meten
+     *
+     * @param view
+     */
     public void doeMeting(View view) {
         Intent intent = new Intent(startscherm.this, MainActivity.class);
         startActivity(intent);
     }
 
-
+    /**
+     * Maakt een alertDialog aan om settings aan te passen.
+     *
+     * @param view
+     */
     public void openSettings(View view) {
         final int[] change = {0};
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -281,15 +312,15 @@ public class startscherm extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                    try {
-                        if (s != "") {
+                try {
+                    if (s != "") {
 
-                                MainActivity.hoelangMeten = Integer.parseInt(s.toString());
-                            Log.e("onTextChanged: ", String.valueOf(MainActivity.hoelangMeten));
-                        }
-                    } catch (Exception e) {
+                        MainActivity.hoelangMeten = Integer.parseInt(s.toString());
+                        Log.e("onTextChanged: ", String.valueOf(MainActivity.hoelangMeten));
                     }
+                } catch (Exception e) {
                 }
+            }
 
         });
         timing.setText("15");

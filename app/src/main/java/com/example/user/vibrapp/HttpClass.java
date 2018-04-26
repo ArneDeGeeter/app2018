@@ -159,7 +159,6 @@ class HttpClass extends AsyncTask<String, Integer, String> {
 
     }
 
-
     private String nieuwProject(String[] strings) {
 
         this.dialog.setMessage("Processing... in adding project");
@@ -181,6 +180,7 @@ class HttpClass extends AsyncTask<String, Integer, String> {
             connection.setRequestProperty("long", strings[3]);
             connection.setRequestProperty("lat", strings[4]);
             connection.setRequestProperty("hertz", String.valueOf(MainActivity.hertz));
+            connection.setRequestProperty("public", strings[6]);
             connection.setConnectTimeout(20000);
             connection.setReadTimeout(20000);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());

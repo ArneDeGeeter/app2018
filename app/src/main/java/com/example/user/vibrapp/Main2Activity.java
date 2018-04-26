@@ -48,14 +48,21 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Meld de gebruiker aan, en verwijst zich door naar de juiste activity afhankelijk van vooraf gegaande gebeurtenissen
+     *
+     * @param view
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void meting(View view) throws ExecutionException, InterruptedException {
         Button b = findViewById(R.id.button);
         EditText l = (EditText) findViewById(R.id.editText);
         EditText p = (EditText) findViewById(R.id.editText2);
 
-        String pass=Hashing.sha256().hashString(p.getText().toString()/*Password to hash*/, StandardCharsets.UTF_8).toString();
-        Log.e("meting: ",pass );
+        String pass = Hashing.sha256().hashString(p.getText().toString()/*Password to hash*/, StandardCharsets.UTF_8).toString();
+        Log.e("meting: ", pass);
 
         String result = new HttpClass(Main2Activity.this).execute("login", l.getText().toString(), pass, Main3Activity.mode).get();
 
@@ -135,6 +142,7 @@ public class Main2Activity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String type = null;
+                    String publiek = null;
                     if (rg.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please select type's", Toast.LENGTH_SHORT).show();
                     } else {
@@ -143,12 +151,21 @@ public class Main2Activity extends AppCompatActivity {
                         // find the radiobutton by returned id
                         type = (String) ((rb[0].getId() == selectedId) ? rb[0].getText() : rb[1].getText());
                     }
+                    if (rg2.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(getApplicationContext(), "Please select type's", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // get selected radio button from radioGroup
+                        int selectedId = rg2.getCheckedRadioButtonId();
+                        // find the radiobutton by returned id
+                        publiek = (String) ((rb2[0].getId() == selectedId) ? "1" : "0");
+                    }
                     if (titleBox.getText().toString().matches("") || descriptionBox.getText().toString().matches("")) {
-                        textView.setVisibility(TextView.VISIBLE);
+                        Toast toast = Toast.makeText(Main2Activity.this, "Please fill in all fields", Toast.LENGTH_LONG);
+                        toast.show();
                     } else {
                         Editable YouEditTextValue = titleBox.getText();
                         alert.setTitle("");
-                        new HttpClass(Main2Activity.this).execute("NProj", titleBox.getText().toString(), descriptionBox.getText().toString(), String.valueOf(MainActivity.l.getLatitude()), String.valueOf(MainActivity.l.getLongitude()), type);
+                        new HttpClass(Main2Activity.this).execute("NProj", titleBox.getText().toString(), descriptionBox.getText().toString(), String.valueOf(MainActivity.l.getLatitude()), String.valueOf(MainActivity.l.getLongitude()), type, publiek);
                     }
                 }
             });
@@ -201,6 +218,11 @@ public class Main2Activity extends AppCompatActivity {
         //  }
     }
 
+    /**
+     * Gaat naar de registerview
+     *
+     * @param view
+     */
     public void register(View view) {
         Intent intent = new Intent(this, registreren.class);
         startActivity(intent);

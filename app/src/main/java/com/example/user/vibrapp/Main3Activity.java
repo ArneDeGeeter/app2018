@@ -36,6 +36,12 @@ public class Main3Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checkt als de gebruiker ingelogd is, indien wel stuurt het hem naar de activity om een project
+     * te kiezen om de meting in up te loaden, anders naar het loginscherm.
+     *
+     * @param view
+     */
     public void toevoegenEigenProj(View view) {
         mode = "toevoegenEigenProj";
 
@@ -57,6 +63,12 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checkt als de persoon ingelogd is, indien wel, maakt een alertDialog om alle parameters aan
+     * te passen voor een nieuw project aan te maken, anders stuurt het de gebruiker naar het loginscherm.
+     *
+     * @param view
+     */
     public void nieuwProjectLogin(View view) {
 
         mode = "nieuwProjectLogin";
@@ -168,6 +180,10 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Geeft een alertDialog om de token in te geven.
+     * @param view
+     */
     public void toevoegenViaToken(View view) {
         mode = "toevoegenViaToken";
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -204,9 +220,4 @@ public class Main3Activity extends AppCompatActivity {
         alert.show();
     }
 
-    public void lokaalOpslaan(View view) {
-        mode = "lokaalOpslaan";
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
